@@ -22,10 +22,9 @@ class jenkins::cli {
     Class['jenkins::cli'] ->
       Anchor['jenkins::end']
 
-  $jar = "${jenkins::libdir}/jenkins-cli.jar"
-  $grep_jarname = "JARNAME=\$(jar -tf ${jenkins::libdir}/jenkins.war | grep 'WEB-INF/lib/cli-.*\.jar')"
-  $extract_jar = "jar -xf ${jenkins::libdir}/jenkins.war \$JARNAME"
-  $move_jar = "mv \$JARNAME ${jar}"
+  $jar = "/usr/share/jenkins/jenkins-cli.jar"
+  $extract_jar = "jar -xf /usr/share/java/jenkins.war WEB-INF/lib/"
+  $move_jar = "mv WEB-INF/lib/cli-*.jar ${jar}"
   $remove_dir = 'rm -rf WEB-INF'
 
   exec { 'jenkins-cli' :
